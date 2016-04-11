@@ -28,9 +28,10 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
       result = new JLabel(filler);  
       add(result,BorderLayout.SOUTH);
    
-      //dealGame = new MemoryGameModel(); 
-      //rows = dealGame.getRows(); 
-      //cols = dealGame.getCols();
+     // calls the model part
+      dealGame = new MemoryGameModel(); 
+      rows = dealGame.getRows(); 
+      cols = dealGame.getCols();
       
       /**********detailed set up of the Panel (GridLayot)************/               
       Panel pDoors = new Panel();
