@@ -56,7 +56,9 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
       int i=0;
       while( source != doors[i])
          i++; 
-      
+     //send in button push and let RandomPrizes object figure out the game 
+     dealGame.TakeTurn(i);
+     doors[i].setIcon(dealGame.get(i));
    
    
    }// main
