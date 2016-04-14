@@ -9,7 +9,7 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
    private int rows=2;
    private int cols = 2; 
    private JButton [] doors  = new JButton[4];
-   //private  MemoryGame;
+   private  GameModel mg;
    private String filler = "   "; 
    private JLabel result; 
 
@@ -30,9 +30,9 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
       result = new JLabel(filler);  
       add(result,BorderLayout.SOUTH);
    
-      //MemoryGame mg = new MemoryGame(); 
-      //rows = MemoryGame.getRows(); 
-      //cols = MemoryGame.getCols();
+      mg = new MemoryGameModel(); 
+      rows = mg.getRows(); 
+      cols = mg.getCols();
       
       /**********detailed set up of the Panel (GridLayot)************/               
       Panel pDoors = new Panel();
@@ -51,26 +51,27 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
    }
 
    public void actionPerformed(ActionEvent ae){
-
-   JButton source = (JButton)ae.getSource();
    
-  //Find out which button was pushed
-  /*int i=0
-  while(source != doors[i])
-      i++;
-      */
-  //first half of turn   
-  mg.takeTurn(0);
-  source.setImage(mg.get(0));
-  //second half of turn 
-  mg.takeTurn(1);
-  source.setImage(mg.get(1));
-  
-  //if(mg.getMatch())
-  
-  //doors[i].setIcon(dealGame.get(i));
-  //result.setText(dealGame.reportWinner());
+      JButton source = (JButton)ae.getSource();
+   
+   //Find out which button was pushed
+      int i=0;
+      while(source != doors[i])
+         i++;
+      
+   //first half of turn   
+      mg.takeTurn(0);
+      source.setIcon(mg.get(i));
+   //second half of turn 
+      mg.takeTurn(1);
+      source.setIcon(mg.get(i));
+      //doors[i].setIcon(mg.get(i));
+   
+   // if(mg.getMatch()){
+   
+   
+    //result.setText(mg.reportWinner());}
    
    }// main
  
-} // 
+} //
