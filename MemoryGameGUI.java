@@ -60,10 +60,10 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
       i++;
       */
   //first half of turn   
-  mg.TakeTurn(0);
+  mg.takeTurn(0);
   source.setImage(mg.get(0));
   //second half of turn 
-  mg.TakeTurn(1);
+  mg.takeTurn(1);
   source.setImage(mg.get(1));
   
   //if(mg.getMatch())
