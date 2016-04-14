@@ -51,15 +51,25 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
    }
 
    public void actionPerformed(ActionEvent ae){
+
+   JButton source = (JButton)ae.getSource();
    
-      JButton source = (JButton)ae.getSource(); 
-      // find out which button was pushed. Fortunately they are all in an array called doors
-      int i=0;
-      while( source != doors[i])
-         i++; 
-      
-      //MemoryGame.takeTurn(i); 
-      //doors[i].setIcon(MemoryGame.get(i));
+  //Find out which button was pushed
+  /*int i=0
+  while(source != doors[i])
+      i++;
+      */
+  //first half of turn   
+  mg.TakeTurn(0);
+  source.setImage(mg.get(0));
+  //second half of turn 
+  mg.TakeTurn(1);
+  source.setImage(mg.get(1));
+  
+  //if(mg.getMatch())
+  
+  //doors[i].setIcon(dealGame.get(i));
+  //result.setText(dealGame.reportWinner());
    
    }// main
  
