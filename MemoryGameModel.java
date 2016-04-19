@@ -3,41 +3,51 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-//My portion of the group project
+// Lauren Calderella
 
-public class MemoryGameModel extends GameModel{
+public class NewMemoryGameModel extends GameModel{
 
    //Declare stuff
-   private ImageIcon [] images = new ImageIcon[4];
+   private ImageIcon [] images = new ImageIcon[16];
    private ImageIcon coverimage = new ImageIcon("watermelon.jpg");
    
+   
    boolean match = false;
-   int attempts = 0;
    int choice1;
    int choice2;
-   int numberOfCardsFlipped;
+   int numberOfCardsFlipped = 0;;
    int numberOfMatches = 0;
    int numberOfAttempts = 0;
    
-     
-   public MemoryGameModel(){
+   
+   public NewMemoryGameModel(){
       images[0] = new ImageIcon("Dog1.jpg");
       images[1] = new ImageIcon("Dog1.jpg");
       images[2] = new ImageIcon("Dog2.jpg");
       images[3] = new ImageIcon("Dog2.jpg");
-      //Shuffle
-      /*for (int i = 0; i < images.length; i++){
+      images[4] = new ImageIcon("Dog3.jpg");
+      images[5] = new ImageIcon("Dog3.jpg");
+      images[6] = new ImageIcon("Dog4.jpg");
+      images[7] = new ImageIcon("Dog4.jpg");
+      images[8] = new ImageIcon("Dog5.jpg");
+      images[9] = new ImageIcon("Dog5.jpg");
+      images[10] = new ImageIcon("Dog6.jpg");
+      images[11] = new ImageIcon("Dog6.jpg");
+      images[12] = new ImageIcon("Dog7.jpg");
+      images[13] = new ImageIcon("Dog7.jpg");
+      images[14] = new ImageIcon("Dog0.jpg");
+      images[15] = new ImageIcon("Dog0.jpg");
+      
+      // Shuffle
+      for (int i = 0; i < images.length; i++){
          Random random = new Random();
-         int randomNumber = random.nextInt(4);
+         int randomNumber = random.nextInt(images.length);
          ImageIcon imgIcon = images[i];
          ImageIcon randomPick = images[randomNumber];
          images[i] = randomPick;
          images[randomNumber] = imgIcon;
-      }*/
-   }
-      //@Override
-   //void takeTurn(int t){
-   // }
+      }
+   } 
 
 //_____________________________________________________________________________________________________________
         
@@ -54,12 +64,12 @@ public class MemoryGameModel extends GameModel{
         
    @Override
       int getRows(){
-      return 2;
+      return 4;
    }
         
    @Override
       int getCols(){
-      return 2;
+      return 4;
    } 
         
    @Override
@@ -71,26 +81,30 @@ public class MemoryGameModel extends GameModel{
             System.out.println();
          }   
       }
-   }  
+   } 
+
+//_____________________________________________________________________________________________________________
 
    @Override  
-      String reportWinner(){
-      return "";
+   public String reportWinner(){
+      String str;
+      if (numberOfMatches == 8){
+         str = "You Won";
+      }
+      else{
+         str = "Attempts: "+ numberOfAttempts + " Matches: " + numberOfMatches;
+      }
+      return str;
    }  
-
 //_____________________________________________________________________________________________________________
 
 
    //TAKE TURN
    public void takeTurn(int i){
       numberOfCardsFlipped++;
-   
       if (numberOfCardsFlipped % 2 == 0){
          choice2 = i;
-         System.out.println(images[choice2].getDescription());
-         System.out.println(images[choice1].getDescription());
-      
-         if(images[choice2].getDescription() == images[choice1].getDescription()){
+         if(images[choice2].getDescription().equals(images[choice1].getDescription())){
             match = true; 
             numberOfMatches++;
          } 
@@ -102,8 +116,13 @@ public class MemoryGameModel extends GameModel{
       else{
          match = false;
          choice1 = i;
+         return;
       }
-            
+      numberOfAttempts++;
+      System.out.println("Choice 1: " + images[choice1].getDescription());
+      System.out.println("Choice 2: " + images[choice2].getDescription());
+      System.out.println("Number of Matches: " + numberOfMatches);
+      System.out.println("Number of Attempts: " + numberOfAttempts);
    }//close takeTurn
 
 //_____________________________________________________________________________________________________________
@@ -112,27 +131,7 @@ public class MemoryGameModel extends GameModel{
       return match;
    }
    
-   
-  public ImageIcon getImage(int i){
+   public ImageIcon getImage(int i){
       return images[i];
-  }
-
-}//close class
-
-
-//_____________________________________________________________________________________________________________
-
-
-
-class Thing{
-   public static void main(String[] args){
-      MemoryGameModel mg = new MemoryGameModel();
-      mg.display();
-      System.out.println(mg.match);
-      
-      mg.takeTurn(0);
-      mg.takeTurn(3); 
-      
-      System.out.println(mg.match); 
    }
 }
