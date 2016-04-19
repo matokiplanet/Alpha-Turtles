@@ -62,21 +62,18 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
       mg.takeTurn(i);
       source.setIcon(mg.get(i));
          
-   //check match
-   // if match   
+   //check match Nikki Zhang
+   // if match (new image appears) 
       if(mg.getMatch() == true && mg.numberOfAttempts>1 && mg.numberOfAttempts%2.0==0){
          
          doors[i].setIcon(mg.get(i));
          doors[i].removeActionListener(this);
-      
       }//if
-   
-      
-   //if false 
+          
+   //if false (flip back)
       if(mg.getMatch() == false && mg.numberOfAttempts>1 && mg.numberOfAttempts%2.0==0 ){
          doors[i].setIcon(mg.coverimage);
          doors[i].removeActionListener(this);
-      
       }//if
    
          
