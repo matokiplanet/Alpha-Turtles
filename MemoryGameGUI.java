@@ -9,7 +9,7 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
    private int rows=2;
    private int cols = 2; 
    private JButton [] doors  = new JButton[4];
-   private  GameModel mg;
+   private MemoryGameModel mg;
    private String filler = "   "; 
    private JLabel result; 
 
@@ -58,19 +58,30 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
       int i=0;
       while(source != doors[i])
          i++;
+     //take turns
+      mg.takeTurn(i);
+      source.setIcon(mg.get(i));
+         
+   //check match
+   // if match   
+      if(mg.getMatch() == true && mg.numberOfAttempts>1 && mg.numberOfAttempts%2.0==0){
+         
+         doors[i].setIcon(mg.get(i));
+         doors[i].removeActionListener(this);
       
-   //first half of turn   
-      mg.takeTurn(0);
-      source.setIcon(mg.get(i));
-   //second half of turn 
-      mg.takeTurn(1);
-      source.setIcon(mg.get(i));
-      //doors[i].setIcon(mg.get(i));
+      }//if
    
-   // if(mg.getMatch()){
+      
+   //if false 
+      if(mg.getMatch() == false && mg.numberOfAttempts>1 && mg.numberOfAttempts%2.0==0 ){
+         doors[i].setIcon(mg.coverimage);
+         doors[i].removeActionListener(this);
+      
+      }//if
    
-   
-    //result.setText(mg.reportWinner());}
+         
+      result.setText(mg.reportWinner());
+     
    
    }// main
  
