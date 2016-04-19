@@ -4,12 +4,12 @@ import java.awt.event.*;
 import java.awt.Font; 
 public class MemoryGameGUI extends JFrame implements ActionListener{
        
-   private final int WINDOW_WIDTH = 410;  // Window width
-   private final int WINDOW_HEIGHT = 410; // Window height
-   private int rows=2;
-   private int cols = 2; 
-   private JButton [] doors  = new JButton[4];
-   private MemoryGameModel mg;
+   private final int WINDOW_WIDTH = 800;  // Window width
+   private final int WINDOW_HEIGHT = 800; // Window height
+   private int rows= 4;
+   private int cols = 4; 
+   private JButton [] doors  = new JButton[16];
+   private  GameModel mg;
    private String filler = "   "; 
    private JLabel result; 
 
@@ -38,7 +38,7 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
       Panel pDoors = new Panel();
       pDoors.setLayout(new GridLayout(rows,cols)); 
       ImageIcon coverimage = new ImageIcon("watermelon.jpg");
-      for(int i=0;i<4;i++){
+      for(int i=0;i<16;i++){
          String doorNumber = i+1+""; 
          doors[i] = new JButton(coverimage);  
          doors[i].setFont(new Font("Comic Sans", Font.ITALIC, 32));
@@ -58,27 +58,19 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
       int i=0;
       while(source != doors[i])
          i++;
-     //take turns
-      mg.takeTurn(i);
+      
+   //first half of turn   
+      mg.takeTurn(0);
       source.setIcon(mg.get(i));
-         
-   //check match Nikki Zhang
-   // if match (new image appears) 
-      if(mg.getMatch() == true && mg.numberOfAttempts>1 && mg.numberOfAttempts%2.0==0){
-         
-         doors[i].setIcon(mg.get(i));
-         doors[i].removeActionListener(this);
-      }//if
-          
-   //if false (flip back)
-      if(mg.getMatch() == false && mg.numberOfAttempts>1 && mg.numberOfAttempts%2.0==0 ){
-         doors[i].setIcon(mg.coverimage);
-         doors[i].removeActionListener(this);
-      }//if
+   //second half of turn 
+      mg.takeTurn(1);
+      source.setIcon(mg.get(i));
+      //doors[i].setIcon(mg.get(i));
    
-         
-      result.setText(mg.reportWinner());
-     
+   // if(mg.getMatch()){
+   
+   
+    //result.setText(mg.reportWinner());}
    
    }// main
  
