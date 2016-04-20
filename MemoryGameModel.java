@@ -3,24 +3,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-// Lauren Calderella
+// Lauren Calderella 
+// Final (4/20)
 
-public class NewMemoryGameModel extends GameModel{
+public class MemoryGameModel extends GameModel{
 
    //Declare stuff
-   private ImageIcon [] images = new ImageIcon[16];
-   private ImageIcon coverimage = new ImageIcon("watermelon.jpg");
-   
+   public ImageIcon [] images = new ImageIcon[16];
+   public ImageIcon coverimage = new ImageIcon("watermelon.jpg");
    
    boolean match = false;
    int choice1;
    int choice2;
-   int numberOfCardsFlipped = 0;;
+   int numberOfCardsFlipped = 0;
    int numberOfMatches = 0;
    int numberOfAttempts = 0;
-   
-   
-   public NewMemoryGameModel(){
+     
+   public MemoryGameModel(){
       images[0] = new ImageIcon("Dog1.jpg");
       images[1] = new ImageIcon("Dog1.jpg");
       images[2] = new ImageIcon("Dog2.jpg");
@@ -38,7 +37,6 @@ public class NewMemoryGameModel extends GameModel{
       images[14] = new ImageIcon("Dog0.jpg");
       images[15] = new ImageIcon("Dog0.jpg");
       
-      // Shuffle
       for (int i = 0; i < images.length; i++){
          Random random = new Random();
          int randomNumber = random.nextInt(images.length);
@@ -58,7 +56,7 @@ public class NewMemoryGameModel extends GameModel{
    }
         
    @Override
-      ImageIcon get(int i){
+   ImageIcon get(int i){
       return images[i];
    } 
         
@@ -83,8 +81,6 @@ public class NewMemoryGameModel extends GameModel{
       }
    } 
 
-//_____________________________________________________________________________________________________________
-
    @Override  
    public String reportWinner(){
       String str;
@@ -96,6 +92,7 @@ public class NewMemoryGameModel extends GameModel{
       }
       return str;
    }  
+
 //_____________________________________________________________________________________________________________
 
 
@@ -116,22 +113,39 @@ public class NewMemoryGameModel extends GameModel{
       else{
          match = false;
          choice1 = i;
+         numberOfAttempts++;
          return;
       }
-      numberOfAttempts++;
-      System.out.println("Choice 1: " + images[choice1].getDescription());
-      System.out.println("Choice 2: " + images[choice2].getDescription());
-      System.out.println("Number of Matches: " + numberOfMatches);
-      System.out.println("Number of Attempts: " + numberOfAttempts);
-   }//close takeTurn
+      
+      
+      // System.out.println("Choice 1: " + images[choice1].getDescription());
+//       System.out.println("Choice 2: " + images[choice2].getDescription());
+//       System.out.println("Number of Matches: " + numberOfMatches);
+//       System.out.println("Number of Attempts: " + numberOfAttempts);
+
+   } // close takeTurn
 
 //_____________________________________________________________________________________________________________
 
    public boolean getMatch(){
       return match;
    }
+//_____________________________________________________________________________________________________________
    
    public ImageIcon getImage(int i){
       return images[i];
    }
-}
+//_____________________________________________________________________________________________________________
+
+
+   public int getAttempts(int numberOfAttempts){
+      return numberOfAttempts;
+      }
+//_____________________________________________________________________________________________________________
+      
+   public int getMatches(int numberOfMatches){
+      return numberOfMatches;
+      }
+//_____________________________________________________________________________________________________________
+      
+} // close class 
