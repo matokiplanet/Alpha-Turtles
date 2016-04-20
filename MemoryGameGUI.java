@@ -12,8 +12,13 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
    public  MemoryGameModel mg;
    private String filler = "   "; 
    private JLabel result; 
-
-  
+   
+//Heather's part   
+   public int attemptsallowed = 8;
+   public int attemptsleftvar = 8;
+   public int totalmatches = 2;
+   public String numberofmatches = "";
+ 
    public MemoryGameGUI(){
       /*****************whole frame set up BorderLayout****************/
       // Set the window title, ize and close behavious
@@ -51,7 +56,7 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
    }
    
    
-   
+
    public void actionPerformed(ActionEvent ae){
    
       JButton source = (JButton)ae.getSource();
@@ -63,7 +68,10 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
      //take turns
       mg.takeTurn(i);
       source.setIcon(mg.get(i));
-
+      
+      ImageIcon coverimage = new ImageIcon("watermelon.jpg");
+   
+         
    //check match Nikki Zhang and McKenzie Lewis 
    
    //if first time flipping 
@@ -83,20 +91,19 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
       // if false (odd number first half turn)
       if(mg.getMatch() == false && mg.numberOfAttempts>1 && mg.numberOfAttempts%2.0==1){
          
-         doors[i].setIcon(mg.coverimage);
+         doors[i].setIcon(coverimage);
         
       }//if
    
    //if false (flip back)
       if(mg.getMatch() == false && mg.numberOfAttempts>1 && mg.numberOfAttempts%2.0==0 ){
-         doors[i].setIcon(mg.coverimage);
+         doors[i].setIcon(coverimage);
       }//if
    
          
       result.setText(mg.reportWinner());
      
    
- }// main
- 
+   }// main
  
 } //
