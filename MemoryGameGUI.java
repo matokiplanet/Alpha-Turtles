@@ -9,7 +9,7 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
    private int rows= 4;
    private int cols = 4; 
    private JButton [] doors  = new JButton[16];
-   private  GameModel mg;
+   public  MemoryGameModel mg;
    private String filler = "   "; 
    private JLabel result; 
 
@@ -49,7 +49,9 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
          
       setVisible(true);
    }
-
+   
+   
+   
    public void actionPerformed(ActionEvent ae){
    
       JButton source = (JButton)ae.getSource();
@@ -58,20 +60,43 @@ public class MemoryGameGUI extends JFrame implements ActionListener{
       int i=0;
       while(source != doors[i])
          i++;
-      
-   //first half of turn   
-      mg.takeTurn(0);
+     //take turns
+      mg.takeTurn(i);
       source.setIcon(mg.get(i));
-   //second half of turn 
-      mg.takeTurn(1);
-      source.setIcon(mg.get(i));
-      //doors[i].setIcon(mg.get(i));
+
+   //check match Nikki Zhang and McKenzie Lewis 
    
-   // if(mg.getMatch()){
+   //if first time flipping 
+      if(mg.numberOfAttempts==1){
+         
+         doors[i].setIcon(mg.get(i));
+      }//if
    
+   // if match (new image appears) 
+      if(mg.getMatch() == true && mg.numberOfAttempts>1 && mg.numberOfAttempts%2.0==0){
+         
+         doors[i].setIcon(mg.get(i));
+         doors[i].removeActionListener(this);
+                
+      }//if
+          
+      // if false (odd number first half turn)
+      if(mg.getMatch() == false && mg.numberOfAttempts>1 && mg.numberOfAttempts%2.0==1){
+         
+         doors[i].setIcon(mg.coverimage);
+        
+      }//if
    
-    //result.setText(mg.reportWinner());}
+   //if false (flip back)
+      if(mg.getMatch() == false && mg.numberOfAttempts>1 && mg.numberOfAttempts%2.0==0 ){
+         doors[i].setIcon(mg.coverimage);
+      }//if
    
-   }// main
+         
+      result.setText(mg.reportWinner());
+     
+   
+ }// main
+ 
  
 } //
